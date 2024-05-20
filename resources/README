@@ -1,0 +1,7 @@
+This directory contains a subset RNA-seq data from Himes et al 
+(https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSE52778) that was downloaded and subsampled 
+to be used as a lightweight test dataset to quickly run the pipeline after making changes i.e.:
+
+```
+seqtk sample -s100 SRR1039508_1.fastq 10000 | bgzip -c > N61311_untreated_1.fq.gz
+```
