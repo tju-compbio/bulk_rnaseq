@@ -1,5 +1,3 @@
-#configfile: "/oceanus/collab/compbio/pipelines/bulk_rnaseq/config/config.oliver.yaml"
-
 import pandas as pd
 
 SAMPLES = pd.read_table(config['samples']).set_index("sample", drop = False)
