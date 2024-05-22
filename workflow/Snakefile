@@ -6,6 +6,10 @@ SAMPLES = pd.read_table(config['samples']).set_index("sample", drop = False)
 
 rule all:
 	input:
+		# BAM files aligned with STAR
+		expand("{outdir}/{analysis}/star/{sample}/{sample}.{ext}",
+			outdir = config["outdir"], analysis = config["analysis"], 
+			sample = SAMPLES.index.tolist(), ext = ["bam", "bam.bai"]),
 		# raw counts from STAR output
 		expand("{outdir}/{analysis}/star/{sample}/ReadsPerGene.out.tab", 
 			outdir = config["outdir"], analysis = config["analysis"],
@@ -157,18 +161,18 @@ rule star_pe_multi:
 	wrapper:
 		"https://github.com/tju-compbio/snakemake-wrappers/raw/master/bio/star/align"
 
-#rule samtools_index:
-#	input:
-#		"{outdir}/{analysis}/star/{sample}/{sample}.bam",
-#	output:
-#		"{outdir}/{analysis}/star/{sample}/{sample}.bam.bai",
-#	log:
-#		"{outdir}/{analysis}/logs/samtools_index/{sample}.log",
-#	params:
-#		extra="",
-#	threads: 4
-#	wrapper:
-#		"v3.10.2/bio/samtools/index"
+rule samtools_index:
+	input:
+		"{outdir}/{analysis}/star/{sample}/{sample}.bam",
+	output:
+		"{outdir}/{analysis}/star/{sample}/{sample}.bam.bai",
+	log:
+		"{outdir}/{analysis}/logs/samtools_index/{sample}.log",
+	params:
+		extra="",
+	threads: 4
+	wrapper:
+		"v3.10.2/bio/samtools/index"
 
 rule rownames_counts:
 	input:
