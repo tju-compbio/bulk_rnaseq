@@ -1,8 +1,13 @@
 # path to URL or sample sheet (TSV format, columns: sample, condition, ...)
-outdir: /oceanus/collab/compbio/pipelines/bulk_rnaseq/example_analysis 
+outdir: /oceanus/collab/compbio/pipelines/bulk_rnaseq
+analysis: example_analysis_052124
 samples: /oceanus/collab/compbio/pipelines/bulk_rnaseq/config/samples.tsv
-fasta: /oceanus/collab/compbio/projects/ErikBlomain/20240216_desmoid_RNA-seq/data/reference/GRCh38.d1.vd1.fa
-gtf: /oceanus/collab/compbio/projects/ErikBlomain/20240216_desmoid_RNA-seq/data/reference/gencode.v36.annotation.gtf
-STAR_index: /oceanus/collab/compbio/projects/ErikBlomain/20240216_desmoid_RNA-seq/data/reference/star-2.7.5c_GRCh38.d1.vd1_gencode.v36
+fasta: /oceanus/collab/compbio/genome_db/reference_fa/grch38.fa
+genome: grch38
+gtf: /oceanus/collab/compbio/genome_db/reference_fa/grch38.gtf
+STAR_index: /oceanus/collab/compbio/genome_db/reference_db/STAR_grch38
+RSEM_index: /oceanus/collab/compbio/genome_db/reference_db/RSEM_grch38
+# strandedness - for rsem-calculate-expression, accepts "none", "forward", or "reverse"
+strandedness: none
 params:
-        trimmomatic_trimmer: ["LEADING:1","TRAILING:3"]
+ trimmomatic_trimmer: ["LEADING:1","TRAILING:3"]
