@@ -246,3 +246,14 @@ rule rsem_generate_data_matrix_isoforms:
 		"{outdir}/{analysis}/logs/rsem/generate_data_matrix_isoforms.log"
 	wrapper:
 		"v3.10.2/bio/rsem/generate-data-matrix"
+
+rule generate_raw_tpm_counts:
+	input:
+		rsem = expand("{outdir}/{analysis}/rsem/{sample}.genes.results",
+			outdir = config["outdir"], analysis = config["analysis"], 
+			sample = SAMPLES.index.tolist())
+	output:
+		raw_counts = "{outdir}/{analysis}/outs/raw_counts.{analysis}.tsv",
+		tpm_counts = "{outdir}/{analysis}/outs/tpm_counts.{analysis}.tsv"
+	script:
+		"scripts/DE_testing.R"
